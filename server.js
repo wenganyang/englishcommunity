@@ -371,8 +371,13 @@ app.get('/api/threads', (req, res) => {
   });
 });
 
-// 首页路由
+// 首页路由（只处理非API请求）
 app.get('*', (req, res) => {
+  // 跳过API请求，让它们由专门的API路由处理
+  if (req.url.startsWith('/api/')) {
+    res.status(404).json({ message: 'API endpoint not found' });
+    return;
+  }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
