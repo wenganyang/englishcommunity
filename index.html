@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语交流社区</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>英语交流社区</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#discussion">讨论区</a></li>
+                    <li><a href="#vocabulary-test">词汇量检测</a></li>
+                    <li><a href="#essay-correction">作文修改</a></li>
+                    <li><a href="#profile">个人中心</a></li>
+                    <li><a href="#login" id="login-link">登录</a></li>
+                    <li><a href="#register" id="register-link">注册</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section id="home" class="active">
+                <h2>欢迎来到英语交流社区</h2>
+                <p>这是一个中文的英语学习社区，您可以在这里与其他会员一起讨论、分享英语学习经验，使用词汇量检测工具评估您的英语水平，以及提交作文获取修改建议。</p>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>讨论区</h3>
+                        <p>与其他会员交流英语学习心得，分享学习资源</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>词汇量检测</h3>
+                        <p>测试您的英语词汇量水平，了解自己的学习进度</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>作文修改</h3>
+                        <p>提交英语作文，获取专业的修改建议</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="discussion">
+                <h2>讨论区</h2>
+                <div class="discussion-container">
+                    <div class="thread-list">
+                        <div class="thread-item">
+                            <h3>如何提高英语口语？</h3>
+                            <p>发布者：小明 | 回复：15 | 浏览：120</p>
+                        </div>
+                        <div class="thread-item">
+                            <h3>推荐一些英语学习资源</h3>
+                            <p>发布者：小红 | 回复：8 | 浏览：85</p>
+                        </div>
+                        <div class="thread-item">
+                            <h3>英语听力练习方法</h3>
+                            <p>发布者：小李 | 回复：12 | 浏览：98</p>
+                        </div>
+                    </div>
+                    <div class="thread-form">
+                        <h3>发布新话题</h3>
+                        <input type="text" placeholder="标题">
+                        <textarea placeholder="内容"></textarea>
+                        <button>发布</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="vocabulary-test">
+                <h2>词汇量检测</h2>
+                <div class="test-container">
+                    <p>点击开始按钮，测试您的英语词汇量水平</p>
+                    <button id="start-test">开始测试</button>
+                    <div id="test-questions" class="hidden">
+                        <div class="question">
+                            <p>1. What does "ubiquitous" mean?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a. Rare</label>
+                                <label><input type="radio" name="q1" value="b"> b. Everywhere</label>
+                                <label><input type="radio" name="q1" value="c"> c. Expensive</label>
+                                <label><input type="radio" name="q1" value="d"> d. Dangerous</label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>2. What does "ephemeral" mean?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a. Lasting a short time</label>
+                                <label><input type="radio" name="q2" value="b"> b. Very old</label>
+                                <label><input type="radio" name="q2" value="c"> c. Easy to understand</label>
+                                <label><input type="radio" name="q2" value="d"> d. Difficult to pronounce</label>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <p>3. What does "perspicacious" mean?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a. Stubborn</label>
+                                <label><input type="radio" name="q3" value="b"> b. Quick to understand</label>
+                                <label><input type="radio" name="q3" value="c"> c. Lazy</label>
+                                <label><input type="radio" name="q3" value="d"> d. Forgetful</label>
+                            </div>
+                        </div>
+                        <button id="submit-test">提交测试</button>
+                    </div>
+                    <div id="test-result" class="hidden">
+                        <h3>测试结果</h3>
+                        <p>您的词汇量水平：<span id="vocabulary-level"></span></p>
+                        <p>估计词汇量：<span id="vocabulary-size"></span></p>
+                        <button id="retake-test">重新测试</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="essay-correction">
+                <h2>作文修改</h2>
+                <div class="essay-container">
+                    <h3>提交您的英语作文</h3>
+                    <textarea placeholder="请在这里粘贴您的英语作文"></textarea>
+                    <button id="submit-essay">提交修改</button>
+                    <div id="essay-result" class="hidden">
+                        <h3>修改结果</h3>
+                        <div class="corrected-essay"></div>
+                        <div class="feedback"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="profile">
+                <h2>个人中心</h2>
+                <div class="profile-container">
+                    <div class="profile-info">
+                        <h3>用户信息</h3>
+                        <p>用户名：访客</p>
+                        <p>注册时间：2026-03-27</p>
+                        <p>词汇量水平：中级</p>
+                    </div>
+                    <div class="profile-stats">
+                        <h3>学习统计</h3>
+                        <p>发布话题：0</p>
+                        <p>回复次数：0</p>
+                        <p>作文提交：0</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 英语交流社区. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- 登录模态框 -->
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>用户登录</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" placeholder="请输入密码">
+                </div>
+                <button type="submit">登录</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 注册模态框 -->
+    <div id="register-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>用户注册</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">邮箱</label>
+                    <input type="email" id="register-email" placeholder="请输入邮箱">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">确认密码</label>
+                    <input type="password" id="register-confirm-password" placeholder="请确认密码">
+                </div>
+                <button type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
