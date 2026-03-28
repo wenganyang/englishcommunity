@@ -19,11 +19,12 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '.')));
 
 // SQLite数据库连接
-const db = new sqlite3.Database('./englishcommunity.db', (err) => {
+const dbPath = path.join(__dirname, 'englishcommunity.db');
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('数据库连接错误:', err);
   } else {
-    console.log('SQLite数据库连接成功');
+    console.log('SQLite数据库连接成功，路径:', dbPath);
     // 初始化数据库表
     initDatabase();
   }
