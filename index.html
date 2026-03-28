@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英语交流社区</title>
+    <title>苹果乐乐的天空</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
         <header>
-            <h1>英语交流社区</h1>
+            <h1>苹果乐乐的天空</h1>
             <nav>
                 <ul>
                     <li><a href="#home">首页</a></li>
                     <li><a href="#discussion">讨论区</a></li>
                     <li><a href="#vocabulary-test">词汇量检测</a></li>
+                    <li><a href="#vocabulary-game">词汇游戏</a></li>
                     <li><a href="#essay-correction">作文修改</a></li>
                     <li><a href="#profile">个人中心</a></li>
                     <li><a href="#login" id="login-link">登录</a></li>
                     <li><a href="#register" id="register-link">注册</a></li>
+                    <li><a href="#admin-login" id="admin-login-link" class="admin-login-link">管理员登录</a></li>
                 </ul>
             </nav>
         </header>
         
         <main>
             <section id="home" class="active">
-                <h2>欢迎来到英语交流社区</h2>
-                <p>这是一个中文的英语学习社区，您可以在这里与其他会员一起讨论、分享英语学习经验，使用词汇量检测工具评估您的英语水平，以及提交作文获取修改建议。</p>
+                <h2>欢迎来到苹果乐乐的天空</h2>
+                <p>这是一个充满活力的英语学习社区，您可以在这里与其他小伙伴一起讨论、分享英语学习经验，使用词汇量检测工具评估您的英语水平，以及提交作文获取修改建议。</p>
                 <div class="features">
                     <div class="feature-card">
                         <h3>讨论区</h3>
@@ -60,54 +62,34 @@
                             <p>发布者：小李 | 回复：12 | 浏览：98</p>
                         </div>
                     </div>
-                    <div class="thread-form">
+                    <form class="thread-form">
                         <h3>发布新话题</h3>
                         <input type="text" placeholder="标题">
                         <textarea placeholder="内容"></textarea>
-                        <button>发布</button>
-                    </div>
+                        <button type="submit">发布</button>
+                    </form>
                 </div>
             </section>
             
             <section id="vocabulary-test">
                 <h2>词汇量检测</h2>
                 <div class="test-container">
-                    <p>点击开始按钮，测试您的英语词汇量水平</p>
-                    <button id="start-test">开始测试</button>
+                    <p>选择测试难度，开始测试您的英语词汇量水平</p>
+                    <div id="difficulty-selection">
+                        <button class="difficulty-btn" data-level="easy">初级</button>
+                        <button class="difficulty-btn" data-level="medium">中级</button>
+                        <button class="difficulty-btn" data-level="hard">高级</button>
+                    </div>
                     <div id="test-questions" class="hidden">
-                        <div class="question">
-                            <p>1. What does "ubiquitous" mean?</p>
-                            <div class="options">
-                                <label><input type="radio" name="q1" value="a"> a. Rare</label>
-                                <label><input type="radio" name="q1" value="b"> b. Everywhere</label>
-                                <label><input type="radio" name="q1" value="c"> c. Expensive</label>
-                                <label><input type="radio" name="q1" value="d"> d. Dangerous</label>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <p>2. What does "ephemeral" mean?</p>
-                            <div class="options">
-                                <label><input type="radio" name="q2" value="a"> a. Lasting a short time</label>
-                                <label><input type="radio" name="q2" value="b"> b. Very old</label>
-                                <label><input type="radio" name="q2" value="c"> c. Easy to understand</label>
-                                <label><input type="radio" name="q2" value="d"> d. Difficult to pronounce</label>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <p>3. What does "perspicacious" mean?</p>
-                            <div class="options">
-                                <label><input type="radio" name="q3" value="a"> a. Stubborn</label>
-                                <label><input type="radio" name="q3" value="b"> b. Quick to understand</label>
-                                <label><input type="radio" name="q3" value="c"> c. Lazy</label>
-                                <label><input type="radio" name="q3" value="d"> d. Forgetful</label>
-                            </div>
-                        </div>
+                        <h3 id="test-title">词汇测试</h3>
+                        <div id="questions-container"></div>
                         <button id="submit-test">提交测试</button>
                     </div>
                     <div id="test-result" class="hidden">
                         <h3>测试结果</h3>
                         <p>您的词汇量水平：<span id="vocabulary-level"></span></p>
                         <p>估计词汇量：<span id="vocabulary-size"></span></p>
+                        <p>正确率：<span id="correct-rate"></span></p>
                         <button id="retake-test">重新测试</button>
                     </div>
                 </div>
@@ -119,10 +101,74 @@
                     <h3>提交您的英语作文</h3>
                     <textarea placeholder="请在这里粘贴您的英语作文"></textarea>
                     <button id="submit-essay">提交修改</button>
+                    <div id="essay-submitted" class="hidden">
+                        <h3>提交成功</h3>
+                        <p>您的作文已成功提交，管理员将尽快为您修改。请耐心等待反馈。</p>
+                    </div>
                     <div id="essay-result" class="hidden">
                         <h3>修改结果</h3>
                         <div class="corrected-essay"></div>
                         <div class="feedback"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="admin-panel" class="hidden">
+                <h2>管理员面板</h2>
+                <div class="admin-container">
+                    <h3>待修改作文</h3>
+                    <div id="pending-essays"></div>
+                </div>
+            </section>
+            
+            <section id="vocabulary-game">
+                <h2>词汇游戏</h2>
+                <div class="game-container">
+                    <p>选择游戏模式，开始你的词汇学习之旅！</p>
+                    <div class="game-modes">
+                        <button class="game-mode-btn" data-mode="matching">词汇配对</button>
+                        <button class="game-mode-btn" data-mode="quiz">快速问答</button>
+                        <button class="game-mode-btn" data-mode="memory">记忆挑战</button>
+                    </div>
+                    <div id="game-area" class="hidden">
+                        <div id="matching-game" class="hidden">
+                            <h3>词汇配对游戏</h3>
+                            <p>将英文单词与对应的中文意思配对</p>
+                            <div class="game-stats">
+                                <span>分数：<span id="matching-score">0</span></span>
+                                <span>时间：<span id="matching-time">60</span>秒</span>
+                            </div>
+                            <div class="matching-grid"></div>
+                            <button id="start-matching">开始游戏</button>
+                        </div>
+                        <div id="quiz-game" class="hidden">
+                            <h3>快速问答游戏</h3>
+                            <p>在规定时间内回答尽可能多的词汇问题</p>
+                            <div class="game-stats">
+                                <span>分数：<span id="quiz-score">0</span></span>
+                                <span>时间：<span id="quiz-time">30</span>秒</span>
+                            </div>
+                            <div class="quiz-question"></div>
+                            <button id="start-quiz">开始游戏</button>
+                        </div>
+                        <div id="memory-game" class="hidden">
+                            <h3>记忆挑战游戏</h3>
+                            <p>记住单词的位置，然后配对相同的词汇</p>
+                            <div class="game-stats">
+                                <span>分数：<span id="memory-score">0</span></span>
+                                <span>时间：<span id="memory-time">45</span>秒</span>
+                            </div>
+                            <div class="memory-grid"></div>
+                            <button id="start-memory">开始游戏</button>
+                        </div>
+                        <div id="game-result" class="hidden">
+                            <h3>游戏结果</h3>
+                            <p>最终得分：<span id="final-score"></span></p>
+                            <p>用时：<span id="final-time"></span>秒</p>
+                            <p id="result-message"></p>
+                            <button id="play-again">再玩一次</button>
+                            <button id="back-to-modes">返回游戏模式</button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -147,7 +193,7 @@
         </main>
         
         <footer>
-            <p>&copy; 2026 英语交流社区. All rights reserved.</p>
+            <p>&copy; 2026 苹果乐乐的天空. All rights reserved.</p>
         </footer>
     </div>
     
@@ -193,6 +239,25 @@
                     <input type="password" id="register-confirm-password" placeholder="请确认密码">
                 </div>
                 <button type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 管理员登录模态框 -->
+    <div id="admin-login-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>管理员登录</h2>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-username">用户名</label>
+                    <input type="text" id="admin-username" placeholder="请输入管理员用户名">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">密码</label>
+                    <input type="password" id="admin-password" placeholder="请输入管理员密码">
+                </div>
+                <button type="submit">登录</button>
             </form>
         </div>
     </div>
